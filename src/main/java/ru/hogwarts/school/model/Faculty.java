@@ -40,7 +40,8 @@ public class Faculty {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Faculty faculty)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        Faculty faculty = (Faculty) o;
         return Objects.equals(getName(), faculty.getName()) && Objects.equals(getColor(), faculty.getColor());
     }
 
