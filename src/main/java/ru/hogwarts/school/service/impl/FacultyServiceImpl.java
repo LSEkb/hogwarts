@@ -55,6 +55,6 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> readAll (String color){
         return facultyMap.values().stream()
                 .filter(f -> f.getColor().equals(color))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 }
