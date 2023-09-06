@@ -90,3 +90,6 @@ exit /b %EXIT_CODE%
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
+
+$ ./gradlew tasks
+Downloading https://services.gradle.org/distributions/gradle-8.3-bin.zip
