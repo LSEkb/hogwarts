@@ -38,11 +38,11 @@ public class Faculty {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Faculty faculty = (Faculty) o;
-        return Objects.equals(getName(), faculty.getName()) && Objects.equals(getColor(), faculty.getColor());
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Faculty faculty = (Faculty) other;
+        return name.equals(faculty.getName()) && color.equals(faculty.getColor());
     }
 
     @Override

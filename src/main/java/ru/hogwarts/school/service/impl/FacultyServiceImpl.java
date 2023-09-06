@@ -5,10 +5,7 @@ import ru.hogwarts.school.exception.FacultyException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 @Service
 public class FacultyServiceImpl implements FacultyService {
     private final Map<Long, Faculty> facultyMap = new HashMap<>();

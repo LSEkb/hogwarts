@@ -38,11 +38,11 @@ public class Student {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return getAge() == student.getAge() && Objects.equals(getName(), student.getName());
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Student student = (Student) other;
+        return age == student.getAge() && name.equals(student.getName());
     }
 
     @Override
