@@ -52,7 +52,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Faculty> readAll(String color) {
+    public List<Faculty> readAllByColor(String color) {
         return facultyRepository.findByColor(color);
     }
 }

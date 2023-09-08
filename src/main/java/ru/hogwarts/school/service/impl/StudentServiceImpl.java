@@ -1,6 +1,5 @@
 package ru.hogwarts.school.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.StudentException;
 import ru.hogwarts.school.model.Student;
@@ -55,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> readAll(int age) {
+    public List<Student> readAllByAge(int age) {
         return studentRepository.findByAge(age);
     }
 }

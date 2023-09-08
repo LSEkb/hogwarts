@@ -38,6 +38,6 @@ public class StudentController {
 
     @GetMapping("/age/{age}")
     public List<Student> readAll(@PathVariable int age) {
-        return studentService.readAll(age);
+        return studentService.readAllByAge(age);
     }
 }

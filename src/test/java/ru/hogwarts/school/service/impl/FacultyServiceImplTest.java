@@ -34,7 +34,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void create_repeatedFaculty_trowFacultyException() {
+    void create_repeatedFaculty_throwFacultyException() {
         when(facultyRepository.findByNameAndColor(faculty.getName(), faculty.getColor()))
                 .thenReturn(Optional.of(faculty));
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.create(faculty));
@@ -49,14 +49,14 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void read_facultyNotInDatabase_trowFacultyException() {
+    void read_facultyNotInDatabase_throwFacultyException() {
         when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(1L));
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
-    void update_studentInDatabase_updateAndReturn() {
+    void update_facultyInDatabase_updateAndReturn() {
         when(facultyRepository.findById(faculty.getId())).thenReturn(Optional.of(faculty));
         when(facultyRepository.save(faculty)).thenReturn(faculty);
         Faculty result = underTest.update(faculty);
@@ -64,14 +64,14 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void update_studentNotInDatabase_trowFacultyException() {
+    void update_facultyNotInDatabase_throwFacultyException() {
         when(facultyRepository.findById(faculty.getId())).thenReturn(Optional.empty());
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.update(faculty));
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
-    void delete_studentInDatabase_deleteAndReturn() {
+    void delete_facultyInDatabase_deleteAndReturn() {
         when(facultyRepository.findById(1L)).thenReturn(Optional.of(faculty));
         doNothing().when(facultyRepository).deleteById(1L);
         Faculty result = underTest.delete(1L);
@@ -79,7 +79,7 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void delete_studentNotInDatabase_trowFacultyException() {
+    void delete_facultyNotInDatabase_throwFacultyException() {
         when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(1L));
         assertThrows(FacultyException.class, () -> underTest.read(1L));
@@ -87,24 +87,24 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void readAll_areFacultyWithAge_returnListWithFacultyByAge() {
+    void readAllByColor_areFacultyWithColor_returnListWithFacultyByAge() {
         when(facultyRepository.findByColor("red")).thenReturn(List.of(faculty));
-        List<Faculty> result = underTest.readAll("red");
+        List<Faculty> result = underTest.readAllByColor("red");
         assertEquals(new ArrayList<>(Arrays.asList(faculty)), result);
     }
 
     @Test
-    void readAll_noFacultyWithAge_returnEmptyList() {
+    void readAllByColor_noFacultyWithColor_returnEmptyList() {
         when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAll("yellow");
+        List<Faculty> result = underTest.readAllByColor("red");
         List<Faculty> expected = Collections.<Faculty>emptyList();
         assertEquals(expected, result);
     }
 
     @Test
-    void readAll_noFacultyInDatabase_returnEmptyList() {
+    void readAllByColor_noFacultyInDatabase_returnEmptyList() {
         when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAll("red");
+        List<Faculty> result = underTest.readAllByColor("red");
         List<Faculty> expected = Collections.<Faculty>emptyList();
         assertEquals(expected, result);
     }
