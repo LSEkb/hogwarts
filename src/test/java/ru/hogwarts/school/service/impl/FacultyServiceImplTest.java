@@ -1,102 +1,111 @@
 package ru.hogwarts.school.service.impl;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.hogwarts.school.exception.FacultyException;
-import ru.hogwarts.school.exception.StudentException;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.FacultyRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class FacultyServiceImplTest {
+    @Mock
+    FacultyRepository facultyRepository;
+    @InjectMocks
+    FacultyServiceImpl underTest;
 
-    FacultyServiceImpl underTest = new FacultyServiceImpl();
-
-    Faculty faculty1 = new Faculty(0L, "Griffindor", "red");
-    Faculty faculty2 = new Faculty(0L, "Ravenclaw", "blue");
-    Faculty faculty3 = new Faculty(0L, "Slytherin", "green");
-
+    Faculty faculty = new Faculty(1L, "Griffindor", "red");
 
     @Test
-    void create_newFaculty_addAndReturn(){
-        Faculty result = underTest.create(faculty1);
-        assertEquals((Long) 1L,result.getId());
+    void create_newFaculty_addAndReturn() {
+        when(facultyRepository.findByNameAndColor(faculty.getName(), faculty.getColor()))
+                .thenReturn(Optional.empty());
+        when(facultyRepository.save(faculty)).thenReturn(faculty);
+        Faculty result = underTest.create(faculty);
+        assertEquals(faculty, result);
+        assertEquals((Long) 1L, result.getId());
     }
 
     @Test
     void create_repeatedFaculty_trowFacultyException() {
-        underTest.create(faculty1);
-        FacultyException result = assertThrows(FacultyException.class, () -> underTest.create(faculty1));
+        when(facultyRepository.findByNameAndColor(faculty.getName(), faculty.getColor()))
+                .thenReturn(Optional.of(faculty));
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.create(faculty));
         assertEquals("The faculty is already in the database", result.getMessage());
     }
 
     @Test
     void read_facultyInDatabase_readAndReturn() {
-        underTest.create(faculty1);
+        when(facultyRepository.findById(1L)).thenReturn(Optional.of(faculty));
         Faculty result = underTest.read(1);
-        assertEquals(faculty1, result);
+        assertEquals(faculty, result);
     }
 
     @Test
     void read_facultyNotInDatabase_trowFacultyException() {
-        FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(2));
+        when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(1L));
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
     void update_studentInDatabase_updateAndReturn() {
-        underTest.create(faculty1);
-        Faculty result = underTest.update(faculty1);
-        assertEquals(faculty1, result);
+        when(facultyRepository.findById(faculty.getId())).thenReturn(Optional.of(faculty));
+        when(facultyRepository.save(faculty)).thenReturn(faculty);
+        Faculty result = underTest.update(faculty);
+        assertEquals(faculty, result);
     }
 
     @Test
     void update_studentNotInDatabase_trowFacultyException() {
-        FacultyException result = assertThrows(FacultyException.class, () -> underTest.update(faculty1));
+        when(facultyRepository.findById(faculty.getId())).thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.update(faculty));
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
     void delete_studentInDatabase_deleteAndReturn() {
-        underTest.create(faculty1);
-        Faculty result = underTest.delete(1);
-        assertEquals(faculty1, result);
-        assertThrows(FacultyException.class, () -> underTest.read(1));
+        when(facultyRepository.findById(1L)).thenReturn(Optional.of(faculty));
+        doNothing().when(facultyRepository).deleteById(1L);
+        Faculty result = underTest.delete(1L);
+        assertEquals(faculty, result);
     }
 
     @Test
     void delete_studentNotInDatabase_trowFacultyException() {
-        FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(1));
+        when(facultyRepository.findById(1L)).thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.read(1L));
+        assertThrows(FacultyException.class, () -> underTest.read(1L));
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
     void readAll_areFacultyWithAge_returnListWithFacultyByAge() {
-        underTest.create(faculty1);
-        underTest.create(faculty2);
-        underTest.create(faculty3);
+        when(facultyRepository.findByColor("red")).thenReturn(List.of(faculty));
         List<Faculty> result = underTest.readAll("red");
-        assertEquals(new ArrayList<>(Arrays.asList(faculty1)), result);
+        assertEquals(new ArrayList<>(Arrays.asList(faculty)), result);
     }
 
     @Test
     void readAll_noFacultyWithAge_returnEmptyList() {
-        underTest.create(faculty1);
+        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
         List<Faculty> result = underTest.readAll("yellow");
         List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
     void readAll_noFacultyInDatabase_returnEmptyList() {
+        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
         List<Faculty> result = underTest.readAll("red");
         List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
-
 }
