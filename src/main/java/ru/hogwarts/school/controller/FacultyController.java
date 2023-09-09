@@ -39,6 +39,6 @@ public class FacultyController {
 
     @GetMapping("/color/{color}")
     public List<Faculty> readAll(@PathVariable String color) {
-        return facultyService.readAll(color);
+        return facultyService.readAllByColor(color);
     }
 }

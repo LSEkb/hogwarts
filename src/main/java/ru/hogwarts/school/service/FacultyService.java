@@ -9,5 +9,5 @@ public interface FacultyService {
     Faculty read (long id);
     Faculty update (Faculty faculty);
     Faculty delete (long id);
-    List<Faculty> readAll(String color);
+    List<Faculty> readAllByColor(String color);
 }
