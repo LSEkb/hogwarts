@@ -52,7 +52,20 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Faculty> readAllByColor(String color) {
-        return facultyRepository.findByColor(color);
+    public Faculty readAllByColor(String color) {
+        Optional<Faculty> faculty = facultyRepository.findByColor(color);
+        if (faculty.isEmpty()) {
+            throw new FacultyException("This faculty was not found in the database");
+        }
+        return faculty.get();
+    }
+    @Override
+    public Faculty findByNameOrColor(String name, String color){
+        Optional<Faculty> faculty = facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name,color);
+        if (faculty.isEmpty()) {
+            throw new FacultyException("This faculty was not found in the database");
+        }
+        return faculty.get();
     }
 }
+

@@ -1,6 +1,8 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.exception.FacultyException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
@@ -37,8 +39,16 @@ public class FacultyController {
         return facultyService.delete(id);
     }
 
-    @GetMapping("/color/{color}")
-    public List<Faculty> readAll(@PathVariable String color) {
-        return facultyService.readAllByColor(color);
+    @GetMapping("/color/{color}/{name}")
+    public Faculty readAll(@PathVariable String color, @PathVariable(required = false) String name) {
+//        if ((name == null || name.isBlank()) && (color == null || color.isBlank())) {
+//            ResponseEntity.status(400);
+//        }
+
+//        facultyService.readAllByColor(color)
+        if (name != null && !name.isBlank() || color != null && !color.isBlank()) {
+            return facultyService.findByNameOrColor(color, name);
+        }
+        throw new FacultyException("Не задан параметр поиска");
     }
 }

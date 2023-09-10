@@ -36,8 +36,11 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-    @GetMapping("/age/{age}")
-    public List<Student> readAll(@PathVariable int age) {
+    @GetMapping("/age/{age}/{age2}")
+    public List<Student> readAll(@PathVariable int age, @PathVariable(required = false) int age2) {
+        if(age!=0&&age2!=0){
+            return studentService.findByAgeBetween(age, age2);
+        }
         return studentService.readAllByAge(age);
     }
 }

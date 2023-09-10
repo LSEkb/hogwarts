@@ -11,4 +11,5 @@ public interface StudentService {
     Student update (Student student);
     Student delete (long id);
     List<Student> readAllByAge(int age);
+    public List<Student> findByAgeBetween(int ageMin, int ageMax);
 }

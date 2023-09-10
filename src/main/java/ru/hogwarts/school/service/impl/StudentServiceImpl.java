@@ -57,4 +57,11 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> readAllByAge(int age) {
         return studentRepository.findByAge(age);
     }
+    @Override
+    public List<Student> findByAgeBetween(int ageMin, int ageMax){
+        if (studentRepository.findByAgeBetween(ageMin, ageMax).isEmpty()){
+            throw new StudentException("There are no such students in the database");
+        }
+        return studentRepository.findByAgeBetween(ageMin, ageMax);
+    }
 }

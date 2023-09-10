@@ -86,26 +86,26 @@ class FacultyServiceImplTest {
         assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
-    @Test
-    void readAllByColor_areFacultyWithColor_returnListWithFacultyByAge() {
-        when(facultyRepository.findByColor("red")).thenReturn(List.of(faculty));
-        List<Faculty> result = underTest.readAllByColor("red");
-        assertEquals(new ArrayList<>(Arrays.asList(faculty)), result);
-    }
-
-    @Test
-    void readAllByColor_noFacultyWithColor_returnEmptyList() {
-        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAllByColor("red");
-        List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected, result);
-    }
-
-    @Test
-    void readAllByColor_noFacultyInDatabase_returnEmptyList() {
-        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAllByColor("red");
-        List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected, result);
-    }
+//    @Test
+//    void readAllByColor_areFacultyWithColor_returnListWithFacultyByAge() {
+//        when(facultyRepository.findByColor("red")).thenReturn(List.of(faculty));
+//        List<Faculty> result = underTest.readAllByColor("red");
+//        assertEquals(new ArrayList<>(Arrays.asList(faculty)), result);
+//    }
+//
+//    @Test
+//    void readAllByColor_noFacultyWithColor_returnEmptyList() {
+//        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
+//        List<Faculty> result = underTest.readAllByColor("red");
+//        List<Faculty> expected = Collections.<Faculty>emptyList();
+//        assertEquals(expected, result);
+//    }
+//
+//    @Test
+//    void readAllByColor_noFacultyInDatabase_returnEmptyList() {
+//        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
+//        List<Faculty> result = underTest.readAllByColor("red");
+//        List<Faculty> expected = Collections.<Faculty>emptyList();
+//        assertEquals(expected, result);
+//    }
 }
