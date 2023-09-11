@@ -150,7 +150,7 @@ class FacultyServiceImplTest {
 
     @Test
     void readStudentsByFaculty_returnListStudent() {
-        when(studentRepository.existsById(1L)).thenReturn(true);
+        when(facultyRepository.existsById(1L)).thenReturn(true);
         when(studentRepository.findByFaculty_id(1L)).thenReturn(List.of(student));
         List<Student> result = underTest.readStudentsByFaculty(1L);
         assertEquals(List.of(student), result);
@@ -158,7 +158,7 @@ class FacultyServiceImplTest {
 
     @Test
     void readStudentsByFaculty_throwFacultyException() {
-        when(studentRepository.existsById(1L)).thenReturn(false);
+        when(facultyRepository.existsById(1L)).thenReturn(false);
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
         assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
         assertEquals("The faculty with this Id was not found in the database", result.getMessage());
