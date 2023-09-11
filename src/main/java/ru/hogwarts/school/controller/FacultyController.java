@@ -39,16 +39,18 @@ public class FacultyController {
         return facultyService.delete(id);
     }
 
-    @GetMapping("/color/{color}/{name}")
-    public Faculty readAll(@PathVariable String color, @PathVariable(required = false) String name) {
-//        if ((name == null || name.isBlank()) && (color == null || color.isBlank())) {
-//            ResponseEntity.status(400);
-//        }
+    @GetMapping("/color/{color}")
+    public Faculty readAll(@PathVariable String color) {
+        return facultyService.readAllByColor(color);
+    }
 
-//        facultyService.readAllByColor(color)
-        if (name != null && !name.isBlank() || color != null && !color.isBlank()) {
-            return facultyService.findByNameOrColor(color, name);
-        }
-        throw new FacultyException("Не задан параметр поиска");
+    @GetMapping("/read/color,name")
+    public Faculty readAllByColoOrName(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
+        return facultyService.readByNameOrColor(name,color);
+    }
+
+    @GetMapping("/students")
+    public List<Student> readStudentsByFaculty(@RequestParam long id){
+        return facultyService.readStudentsByFaculty(id);
     }
 }

@@ -2,6 +2,7 @@ package ru.hogwarts.school.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.StudentException;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
@@ -55,13 +56,23 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> readAllByAge(int age) {
+//        if (studentRepository.findByAge(age).isEmpty()){
+//            throw new StudentException("There are no such students in the database");
+//        }
         return studentRepository.findByAge(age);
     }
     @Override
-    public List<Student> findByAgeBetween(int ageMin, int ageMax){
-        if (studentRepository.findByAgeBetween(ageMin, ageMax).isEmpty()){
-            throw new StudentException("There are no such students in the database");
-        }
+    public List<Student> readByAgeBetween(int ageMin, int ageMax){
+//        if (studentRepository.findByAgeBetween(ageMin, ageMax).isEmpty()){
+//            throw new StudentException("There are no such students in the database");
+//        }
         return studentRepository.findByAgeBetween(ageMin, ageMax);
+    }
+    @Override
+    public Faculty readByFaculty(long id){
+        if (studentRepository.findById(id).isEmpty()) {
+            throw new StudentException("This student was not found in the database");
+        }
+        return studentRepository.findById(id).get().getFaculty();
     }
 }

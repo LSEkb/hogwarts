@@ -3,7 +3,9 @@ package ru.hogwarts.school.service.impl;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.FacultyException;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
+import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.*;
@@ -11,9 +13,11 @@ import java.util.*;
 @Service
 public class FacultyServiceImpl implements FacultyService {
     private final FacultyRepository facultyRepository;
+    private final StudentRepository studentRepository;
 
-    public FacultyServiceImpl(FacultyRepository facultyRepository) {
+    public FacultyServiceImpl(FacultyRepository facultyRepository, StudentRepository studentRepository) {
         this.facultyRepository = facultyRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -59,13 +63,22 @@ public class FacultyServiceImpl implements FacultyService {
         }
         return faculty.get();
     }
+
     @Override
-    public Faculty findByNameOrColor(String name, String color){
-        Optional<Faculty> faculty = facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name,color);
+    public Faculty readByNameOrColor(String name, String color) {
+        Optional<Faculty> faculty = facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
         if (faculty.isEmpty()) {
             throw new FacultyException("This faculty was not found in the database");
         }
         return faculty.get();
+    }
+
+    @Override
+    public List<Student> readStudentsByFaculty(long id) {
+        if (!studentRepository.existsById(id)) {
+            throw new FacultyException("The faculty with this Id was not found in the database");
+        }
+        return studentRepository.findByFaculty_id(id);
     }
 }
 
