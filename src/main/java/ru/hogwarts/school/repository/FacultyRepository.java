@@ -13,7 +13,5 @@ public interface FacultyRepository extends JpaRepository<Faculty,Long> {
 
     Optional<Faculty> findByColor(String color);
 
-    boolean existById (long id);
-
     Optional<Faculty> findByNameIgnoreCaseOrColorIgnoreCase(String name, String color);
 }

@@ -56,23 +56,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> readAllByAge(int age) {
-//        if (studentRepository.findByAge(age).isEmpty()){
-//            throw new StudentException("There are no such students in the database");
-//        }
         return studentRepository.findByAge(age);
     }
     @Override
     public List<Student> readByAgeBetween(int ageMin, int ageMax){
-//        if (studentRepository.findByAgeBetween(ageMin, ageMax).isEmpty()){
-//            throw new StudentException("There are no such students in the database");
-//        }
         return studentRepository.findByAgeBetween(ageMin, ageMax);
     }
     @Override
-    public Faculty readByFaculty(long id){
-        if (studentRepository.findById(id).isEmpty()) {
-            throw new StudentException("This student was not found in the database");
-        }
-        return studentRepository.findById(id).get().getFaculty();
+    public Faculty readFaculty(long id){
+        return read(id).getFaculty();
     }
 }

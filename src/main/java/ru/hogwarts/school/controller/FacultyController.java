@@ -44,7 +44,7 @@ public class FacultyController {
         return facultyService.readAllByColor(color);
     }
 
-    @GetMapping("/read/color,name")
+    @GetMapping("/read")
     public Faculty readAllByColoOrName(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
         return facultyService.readByNameOrColor(name,color);
     }

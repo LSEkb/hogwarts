@@ -75,7 +75,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public List<Student> readStudentsByFaculty(long id) {
-        if (!studentRepository.existsById(id)) {
+        if (!facultyRepository.existsById(id)) {
             throw new FacultyException("The faculty with this Id was not found in the database");
         }
         return studentRepository.findByFaculty_id(id);

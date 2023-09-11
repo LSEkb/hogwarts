@@ -118,17 +118,17 @@ class StudentServiceImplTest {
     }
 
     @Test
-    void readByFaculty_isStudentWithThisId_returnFacultyOfStudentById() {
+    void readFaculty_isStudentWithThisId_returnFacultyOfStudentById() {
         when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
-        Faculty result = underTest.readByFaculty(1L);
+        Faculty result = underTest.readFaculty(1L);
         assertEquals(new Faculty(1L, "Griffindor", "red"), result);
     }
 
     @Test
-    void readByFaculty_notStudentWithThisId_throwStudentException() {
+    void readFaculty_notStudentWithThisId_throwStudentException() {
         when(studentRepository.findById(1L)).thenReturn(Optional.empty());
         StudentException result = assertThrows(StudentException.class, () -> underTest.read(1L));
-        assertThrows(StudentException.class, () -> underTest.readByFaculty(1L));
+        assertThrows(StudentException.class, () -> underTest.readFaculty(1L));
         assertEquals("This student was not found in the database", result.getMessage());
     }
 }

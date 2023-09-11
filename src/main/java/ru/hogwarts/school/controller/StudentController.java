@@ -46,8 +46,8 @@ public class StudentController {
         return studentService.readByAgeBetween(age, age2);
     }
 
-    @GetMapping("/faculty/{id}")
-    public Faculty readByFaculty(@PathVariable long id){
-        return studentService.readByFaculty(id);
+    @GetMapping("/{id}/faculty")
+    public Faculty readFaculty(@PathVariable long id){
+        return studentService.readFaculty(id);
     }
 }
