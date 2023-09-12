@@ -7,7 +7,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.hogwarts.school.exception.FacultyException;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
 
@@ -17,11 +19,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class FacultyServiceImplTest {
     @Mock
+    StudentRepository studentRepository;
+    @Mock
     FacultyRepository facultyRepository;
     @InjectMocks
     FacultyServiceImpl underTest;
 
     Faculty faculty = new Faculty(1L, "Griffindor", "red");
+    Student student = new Student(1L, "Harry", 13);
 
     @Test
     void create_newFaculty_addAndReturn() {
@@ -87,25 +92,75 @@ class FacultyServiceImplTest {
     }
 
     @Test
-    void readAllByColor_areFacultyWithColor_returnListWithFacultyByAge() {
-        when(facultyRepository.findByColor("red")).thenReturn(List.of(faculty));
-        List<Faculty> result = underTest.readAllByColor("red");
-        assertEquals(new ArrayList<>(Arrays.asList(faculty)), result);
+    void readAllByColor_isFacultyWithColor_returnFacultyByColor() {
+        when(facultyRepository.findByColor("red")).thenReturn(Optional.of(faculty));
+        Faculty result = underTest.readAllByColor("red");
+        assertEquals(faculty, result);
     }
 
     @Test
-    void readAllByColor_noFacultyWithColor_returnEmptyList() {
-        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAllByColor("red");
-        List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected, result);
+    void readAllByColor_noFacultyWithColor_returnEmpty() {
+        when(facultyRepository.findByColor("red")).thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.readAllByColor("red"));
+        assertThrows(FacultyException.class, () -> underTest.readAllByColor("red"));
+        assertEquals("This faculty was not found in the database", result.getMessage());
     }
 
     @Test
-    void readAllByColor_noFacultyInDatabase_returnEmptyList() {
-        when(facultyRepository.findByColor("red")).thenReturn(new ArrayList<>());
-        List<Faculty> result = underTest.readAllByColor("red");
-        List<Faculty> expected = Collections.<Faculty>emptyList();
-        assertEquals(expected, result);
+    void readAllByColor_noFacultyInDatabase_returnEmpty() {
+        when(facultyRepository.findByColor("red")).thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.readAllByColor("red"));
+        assertThrows(FacultyException.class, () -> underTest.readAllByColor("red"));
+        assertEquals("This faculty was not found in the database", result.getMessage());
+    }
+
+    @Test
+    void readByNameOrColor_isFacultyWithName_returnFaculty() {
+        when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase("griffindor", null))
+                .thenReturn(Optional.of(faculty));
+        Faculty result = underTest.readByNameOrColor("griffindor", null);
+        assertEquals(faculty, result);
+    }
+
+    @Test
+    void readByNameOrColor_isFacultyWithColor_returnFaculty() {
+        when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(null, "red"))
+                .thenReturn(Optional.of(faculty));
+        Faculty result = underTest.readByNameOrColor(null, "red");
+        assertEquals(faculty, result);
+    }
+
+    @Test
+    void readByNameOrColor_notFacultyWithName_throwFacultyException() {
+        when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase("griffindor", null))
+                .thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.readByNameOrColor("griffindor", null));
+        assertThrows(FacultyException.class, () -> underTest.readByNameOrColor("griffindor", null));
+        assertEquals("This faculty was not found in the database", result.getMessage());
+    }
+
+    @Test
+    void readByNameOrColor_notFacultyWithColor_throwFacultyException() {
+        when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(null, "red"))
+                .thenReturn(Optional.empty());
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.readByNameOrColor(null, "red"));
+        assertThrows(FacultyException.class, () -> underTest.readByNameOrColor(null, "red"));
+        assertEquals("This faculty was not found in the database", result.getMessage());
+    }
+
+    @Test
+    void readStudentsByFaculty_returnListStudent() {
+        when(facultyRepository.existsById(1L)).thenReturn(true);
+        when(studentRepository.findByFaculty_id(1L)).thenReturn(List.of(student));
+        List<Student> result = underTest.readStudentsByFaculty(1L);
+        assertEquals(List.of(student), result);
+    }
+
+    @Test
+    void readStudentsByFaculty_throwFacultyException() {
+        when(facultyRepository.existsById(1L)).thenReturn(false);
+        FacultyException result = assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
+        assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
+        assertEquals("The faculty with this Id was not found in the database", result.getMessage());
     }
 }

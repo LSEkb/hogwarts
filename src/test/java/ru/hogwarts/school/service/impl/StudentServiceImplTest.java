@@ -5,11 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.hogwarts.school.exception.FacultyException;
 import ru.hogwarts.school.exception.StudentException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
@@ -26,7 +24,7 @@ class StudentServiceImplTest {
     @InjectMocks
     StudentServiceImpl underTest;
 
-    Student student = new Student(1L, "Harry", 12);
+    Student student = new Student(1L, "Harry", 12, new Faculty(1L, "Griffindor", "red"));
 
     @Test
     void create_newStudent_addAndReturn() {
@@ -43,7 +41,7 @@ class StudentServiceImplTest {
         when(studentRepository.findByNameAndAge(student.getName(), student.getAge()))
                 .thenReturn(Optional.of(student));
         StudentException result = assertThrows(StudentException.class, () -> underTest.create(student));
-        assertEquals("The studenty in the database", result.getMessage());
+        assertEquals("The student is already in the database", result.getMessage());
     }
 
     @Test
@@ -95,23 +93,43 @@ class StudentServiceImplTest {
     void readAllByAge_areStudentWithAge_returnListWithStudentByAge() {
         when(studentRepository.findByAge(12)).thenReturn(List.of(student));
         List<Student> result = underTest.readAllByAge(12);
-        assertEquals(List.of(student),result);
+        assertEquals(List.of(student), result);
     }
 
     @Test
     void readAllByAge_noStudentWithAge_returnEmptyList() {
         when(studentRepository.findByAge(12)).thenReturn(new ArrayList<>());
         List<Student> result = underTest.readAllByAge(12);
-        List<Student> expected = Collections.<Student>emptyList();
-        assertEquals(expected, result);
+        assertEquals(Collections.<Student>emptyList(), result);
     }
 
     @Test
-    void readAllByAge_noFacultyInDatabase_returnEmptyList() {
-        when(studentRepository.findByAge(12)).thenReturn(new ArrayList<>());
-        List<Student> result = underTest.readAllByAge(12);
-        List<Student> expected = Collections.<Student>emptyList();
-        assertEquals(expected, result);
+    void readByAgeBetween_isStudentWithThisAge_returnListStudentsWithThisAge() {
+        when(studentRepository.findByAgeBetween(10, 14)).thenReturn(List.of(student));
+        List<Student> result = underTest.readByAgeBetween(10, 14);
+        assertEquals(List.of(student), result);
+    }
+
+    @Test
+    void readByAgeBetween_notStudentWithThisAge_returnEmptyList() {
+        when(studentRepository.findByAgeBetween(10, 14)).thenReturn(new ArrayList<>());
+        List<Student> result = underTest.readByAgeBetween(10, 14);
+        assertEquals(Collections.<Student>emptyList(), result);
+    }
+
+    @Test
+    void readFaculty_isStudentWithThisId_returnFacultyOfStudentById() {
+        when(studentRepository.findById(1L)).thenReturn(Optional.of(student));
+        Faculty result = underTest.readFaculty(1L);
+        assertEquals(new Faculty(1L, "Griffindor", "red"), result);
+    }
+
+    @Test
+    void readFaculty_notStudentWithThisId_throwStudentException() {
+        when(studentRepository.findById(1L)).thenReturn(Optional.empty());
+        StudentException result = assertThrows(StudentException.class, () -> underTest.read(1L));
+        assertThrows(StudentException.class, () -> underTest.readFaculty(1L));
+        assertEquals("This student was not found in the database", result.getMessage());
     }
 }
 
