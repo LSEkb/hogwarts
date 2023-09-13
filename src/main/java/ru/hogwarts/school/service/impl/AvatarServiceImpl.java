@@ -10,7 +10,7 @@ import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
-import javax.transaction.Transactional;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +18,6 @@ import java.nio.file.Path;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
-@Transactional
 public class AvatarServiceImpl implements AvatarService {
 
     private String avatarsDir;
