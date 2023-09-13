@@ -25,7 +25,8 @@ public class AvatarServiceImpl implements AvatarService {
     private final AvatarRepository avatarRepository;
     private final StudentService studentService;
 
-    public AvatarServiceImpl(AvatarRepository avatarRepository, StudentService studentService, @Value("${students.avatar.dir.path}") String avatarsDir) {
+    public AvatarServiceImpl(AvatarRepository avatarRepository, StudentService studentService,
+                             @Value("${students.avatar.dir.path}") String avatarsDir) {
         this.avatarRepository = avatarRepository;
         this.studentService = studentService;
         this.avatarsDir = avatarsDir;
@@ -35,7 +36,8 @@ public class AvatarServiceImpl implements AvatarService {
     public void uploadAvatar(long studentId, MultipartFile avatarFile) throws IOException {
         Student student = studentService.read(studentId);
 
-        Path filePath = Path.of(avatarsDir, student.getId() + "." + getExtensions(avatarFile.getOriginalFilename()));
+        Path filePath = Path.of(avatarsDir, student.getId() + "."
+                + getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories((filePath.getParent()));
         Files.deleteIfExists(filePath);
 
@@ -60,7 +62,7 @@ public class AvatarServiceImpl implements AvatarService {
 
     @Override
     public Avatar readFromDB(long id) {
-        return avatarRepository.findById(id).orElseThrow(() -> new AvatarException("Avatar not found"));
+        return avatarRepository.findByStudent_id(id).orElseThrow(() -> new AvatarException("Avatar not found"));
     }
 
     private String getExtensions(String fileName) {
