@@ -10,18 +10,7 @@ import ru.hogwarts.school.exception.StudentException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
-//    @ExceptionHandler(StudentException.class)
-//    public ResponseEntity<String> handleStudentException (StudentException ex){
-//        return ResponseEntity
-//                .status(HttpStatus.BAD_REQUEST)
-//                .body(ex.getMessage());
-//    }
-//    @ExceptionHandler(FacultyException.class)
-//    public ResponseEntity<String> handleFacultyException (FacultyException ex){
-//        return ResponseEntity
-//                .status(HttpStatus.BAD_REQUEST)
-//                .body(ex.getMessage());
-//    }
+
     @ExceptionHandler({FacultyException.class, StudentException.class, AvatarException.class})
     public ResponseEntity<String> handleHogwartsException (RuntimeException ex) {
         return ResponseEntity

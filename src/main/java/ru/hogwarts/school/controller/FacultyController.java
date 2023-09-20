@@ -50,7 +50,7 @@ public class FacultyController {
     }
 
     @GetMapping("/students")
-    public List<Student> readStudentsByFaculty(@RequestParam long id){
+    public List<Student> readStudentsInFaculty(@RequestParam long id){
         return facultyService.readStudentsByFaculty(id);
     }
 }
