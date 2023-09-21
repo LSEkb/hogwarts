@@ -85,7 +85,10 @@ class StudentControllerTest {
     void readAllAge__() throws Exception {
         when(studentRepository.findByAge(student.getAge())).thenReturn(List.of(student));
         when(studentRepository.findByAgeBetween(anyInt(), anyInt())).thenReturn(List.of(student));
-        mockMvc.perform(get("/student/age"))
+        mockMvc.perform(get("/student/age")
+                        .param("age", String.valueOf(student.getAge()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].name").value(student.getName()))
                 .andExpect(jsonPath("$.[0].age").value(student.getAge()));

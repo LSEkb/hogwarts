@@ -16,7 +16,6 @@ import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.impl.FacultyServiceImpl;
 import ru.hogwarts.school.service.impl.StudentServiceImpl;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +58,7 @@ public class FacultyControllerTest {
     @Test
     void read() throws Exception {
 //        when(facultyRepository.findById(anyLong())).thenReturn(Optional.empty());
-//        mockMvc.perform(get("/faculty")
+//        mockMvc.perform(get("/faculty/" + faculty.getId())
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isBadRequest())
 //                .andExpect(result -> assertTrue(result.getResolvedException() instanceof HttpClientErrorException.BadRequest))
@@ -106,7 +105,11 @@ public class FacultyControllerTest {
     void readAllByColorOrName() throws Exception {
         when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase
                 (faculty.getName(), faculty.getColor())).thenReturn(Optional.of(faculty));
-        mockMvc.perform(get("/faculty/read"))
+        mockMvc.perform(get("/faculty/read")
+                        .param("name", String.valueOf(faculty.getName()))
+                        .param("color", String.valueOf(faculty.getColor()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
@@ -115,7 +118,9 @@ public class FacultyControllerTest {
     void readStudentsInFaculty() throws Exception {
         Student student = new Student(1L, "Harry", 13, faculty);
         when(studentRepository.findByFaculty_id(anyLong())).thenReturn(List.of(student));
-        mockMvc.perform(get("/faculty/students"))
+        when(facultyRepository.existsById(anyLong())).thenReturn(true);
+        mockMvc.perform(get("/faculty/students")
+                        .param("id", String.valueOf(faculty.getId())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].name").value(student.getName()))
                 .andExpect(jsonPath("$.[0].age").value(student.getAge()));
