@@ -1,7 +1,6 @@
 package ru.hogwarts.school.controller;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,13 +91,12 @@ public class StudentControllerTest {
     void readAllAge__returnStatus200AndStudentList() {
         Student s = studentRepository.save(student);
         ResponseEntity<List<Student>> studentResponseEntity = restTemplate.exchange(
-                "http://localhost:" + port + "/student/age",
+                "http://localhost:" + port + "/student/age?age=" + s.getAge() + "&age2=" + s.getAge(),
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 new ParameterizedTypeReference<List<Student>>(){});
         assertEquals(HttpStatus.OK, studentResponseEntity.getStatusCode());
         assertEquals(List.of(s), studentResponseEntity.getBody());
-
     }
 
     @Test

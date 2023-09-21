@@ -13,13 +13,10 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FacultyControllerTest {
@@ -39,8 +36,8 @@ public class FacultyControllerTest {
 
     @AfterEach
     void afterEach() {
-        facultyRepository.deleteAll();
         studentRepository.deleteAll();
+        facultyRepository.deleteAll();
     }
 
     @Test
@@ -109,15 +106,15 @@ public class FacultyControllerTest {
 
     @Test
     void readStudentsInFaculty__returnStatus200AndStudentsList() {
-        facultyRepository.save(faculty);
-        Student student1 = new Student(1L, "Harry", 13);
-        Student student2 = new Student(2L, "Ron", 13);
-        student1.setFaculty(faculty);
-        student2.setFaculty(faculty);
+        Faculty saveFaculty = facultyRepository.save(faculty);
+        Student student1 = new Student(0L, "Harry", 13);
+        Student student2 = new Student(0L, "Ron", 13);
+        student1.setFaculty(saveFaculty);
+        student2.setFaculty(saveFaculty);
         Student s1 = studentRepository.save(student1);
         Student s2 = studentRepository.save(student2);
         ResponseEntity<List<Student>> responseEntity = restTemplate.exchange(
-                "http://localhost:" + port + "/faculty/students",
+                "http://localhost:" + port + "/faculty/students?id=" + saveFaculty.getId(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Student>>(){});
