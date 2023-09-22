@@ -12,6 +12,12 @@ public interface StudentService {
     Student update (Student student);
     Student delete (long id);
     List<Student> readAllByAge(int age);
-    public List<Student> readByAgeBetween(int ageMin, int ageMax);
+    List<Student> readByAgeBetween(int ageMin, int ageMax);
     Faculty readFaculty(long id);
+
+    Integer totalStudentsInSchool();
+
+    Integer averageAgeOfStudents();
+
+    List<Student> lastFiveStudents();
 }

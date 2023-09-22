@@ -2,6 +2,8 @@ package ru.hogwarts.school.service.impl;
 
 import nonapi.io.github.classgraph.utils.FileUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exception.AvatarException;
@@ -12,6 +14,7 @@ import ru.hogwarts.school.service.StudentService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +48,7 @@ class AvatarServiceImplTest {
         Avatar avatar = new Avatar(1L, "./src/test/resources", 300L, "jpg", new byte[8], student);
         when(avatarRepository.findByStudent_id(student.getId())).thenReturn(Optional.of(avatar));
         Avatar result = avatarService.readFromDB(student.getId());
-        assertEquals(avatar,result);
+        assertEquals(avatar, result);
     }
 
     @Test
@@ -55,7 +58,13 @@ class AvatarServiceImplTest {
         AvatarException result = assertThrows(AvatarException.class, () -> avatarService.readFromDB(student.getId()));
         assertThrows(AvatarException.class, () -> avatarService.readFromDB(student.getId()));
         assertEquals("Avatar not found", result.getMessage());
-        ;
+    }
 
+    @Test
+    void getAvatarsPage__returnListOfAvatars() {
+        Avatar avatar = new Avatar();
+        when(avatarRepository.findAll((PageRequest) any())).thenReturn(new PageImpl<Avatar>(List.of(avatar)));
+        List<Avatar> result = avatarService.getAvatarsPage(1, 1);
+        assertEquals(List.of(avatar), result);
     }
 }
