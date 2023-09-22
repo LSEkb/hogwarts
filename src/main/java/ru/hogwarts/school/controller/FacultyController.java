@@ -40,17 +40,17 @@ public class FacultyController {
     }
 
     @GetMapping("/color/{color}")
-    public Faculty readAll(@PathVariable String color) {
+    public Faculty readByColor(@PathVariable String color) {
         return facultyService.readAllByColor(color);
     }
 
     @GetMapping("/read")
-    public Faculty readAllByColoOrName(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
+    public Faculty readAllByColorOrName(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
         return facultyService.readByNameOrColor(name,color);
     }
 
     @GetMapping("/students")
-    public List<Student> readStudentsByFaculty(@RequestParam long id){
+    public List<Student> readStudentsInFaculty(@RequestParam long id){
         return facultyService.readStudentsByFaculty(id);
     }
 }
