@@ -8,7 +8,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.client.HttpClientErrorException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
@@ -19,13 +18,12 @@ import ru.hogwarts.school.service.impl.StudentServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = {FacultyController.class})
-public class FacultyControllerTest {
+public class FacultyControllerMvcTest {
     @Autowired
     MockMvc mockMvc;
     @Autowired
@@ -57,18 +55,26 @@ public class FacultyControllerTest {
 
     @Test
     void read() throws Exception {
-//        when(facultyRepository.findById(anyLong())).thenReturn(Optional.empty());
-//        mockMvc.perform(get("/faculty/" + faculty.getId())
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isBadRequest())
-//                .andExpect(result -> assertTrue(result.getResolvedException() instanceof HttpClientErrorException.BadRequest))
-//                .andExpect(result -> assertEquals("This faculty was not found in the database", result.getResolvedException().getMessage()));
         when(facultyRepository.findById(anyLong())).thenReturn(Optional.of(faculty));
         mockMvc.perform(get("/faculty/" + faculty.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(faculty.getName()))
                 .andExpect(jsonPath("$.color").value(faculty.getColor()));
     }
+
+    @Test
+    void read_facultyIsNotInDb_returnException() throws Exception {
+        when(facultyRepository.findById(anyLong())).thenReturn(Optional.empty());
+        mockMvc.perform(get("/faculty/" + faculty.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$").value("This faculty was not found in the database"));
+    }
+    /*В FacultyControllerTest при подходе @WebMvcTest в read() будут следующие проверки:
+
+.andExpect(status().isBadRequest())
+
+.andExpect(jsonPath("$").value("This faculty was not found in the database"));*/
 
     @Test
     void update() throws Exception {
