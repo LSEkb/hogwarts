@@ -98,7 +98,7 @@ public class FacultyControllerMvcTest {
     }
 
     @Test
-    void readAllByColor() throws Exception {
+    void readByColor() throws Exception {
         when(facultyRepository.findByColor(faculty.getColor())).thenReturn(Optional.of(faculty));
         mockMvc.perform(get("/faculty/color/" + faculty.getColor()))
                 .andExpect(status().isOk())
@@ -108,7 +108,7 @@ public class FacultyControllerMvcTest {
     }
 
     @Test
-    void readAllByColorOrName() throws Exception {
+    void readByColorOrName() throws Exception {
         when(facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase
                 (faculty.getName(), faculty.getColor())).thenReturn(Optional.of(faculty));
         mockMvc.perform(get("/faculty/read")
