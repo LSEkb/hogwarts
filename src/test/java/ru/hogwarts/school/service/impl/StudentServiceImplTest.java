@@ -11,6 +11,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doNothing;
@@ -24,7 +25,14 @@ class StudentServiceImplTest {
     @InjectMocks
     StudentServiceImpl underTest;
 
-    Student student = new Student(1L, "Harry", 12, new Faculty(1L, "Griffindor", "red"));
+    Student student = new Student(1L, "Harry", 18, new Faculty(1L, "Griffindor", "red"));
+    Student student1 = new Student(2L, "Ron", 18, new Faculty(1L, "Griffindor", "red"));
+    Student student2 = new Student(3L, "Hermione", 18, new Faculty(1L, "Griffindor", "red"));
+    Student student3 = new Student(4L, "Cedric", 12, new Faculty(1L, "Hufflepuff", "yellow"));
+    Student student4 = new Student(5L, "Draco", 12, new Faculty(1L, "Slytherin", "green"));
+    Student student5 = new Student(6L, "Luna", 12, new Faculty(1L, "Ravenclaw", "blue"));
+
+    List<Student> students = List.of(student, student1, student2, student3, student4, student5);
 
     @Test
     void create_newStudent_addAndReturn() {
@@ -130,6 +138,30 @@ class StudentServiceImplTest {
         StudentException result = assertThrows(StudentException.class, () -> underTest.read(1L));
         assertThrows(StudentException.class, () -> underTest.readFaculty(1L));
         assertEquals("This student was not found in the database", result.getMessage());
+    }
+
+    @Test
+    void totalStudentsInSchool() {
+        when(studentRepository.totalStudentsInSchool()).thenReturn(students.size());
+        Integer result = underTest.totalStudentsInSchool();
+        assertEquals(6, result);
+    }
+
+    @Test
+    void averageAgeOfStudents(){
+        when(studentRepository.averageAgeOfStudents())
+                .thenReturn((int)(students.stream().mapToInt(Student::getAge).average().getAsDouble()));
+        Integer result = underTest.averageAgeOfStudents();
+        assertEquals(15, result);
+    }
+
+    @Test
+    void lastFiveStudents() {
+        when(studentRepository.lastStudents(5))
+                .thenReturn(students.stream().sorted(Comparator.comparing(Student::getId).reversed())
+                        .limit(5).collect(Collectors.toList()));
+        List<Student> result = underTest.lastFiveStudents();
+        assertTrue(List.of(student1,student2,student3,student4,student5).containsAll(result));
     }
 }
 
