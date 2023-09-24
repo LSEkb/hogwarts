@@ -80,5 +80,13 @@ public class FacultyServiceImpl implements FacultyService {
         }
         return studentRepository.findByFaculty_id(id);
     }
+
+    @Override
+    public String longestFacultyName(){
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElseThrow(()->new FacultyException("No faculties in database"));
+    }
 }
 

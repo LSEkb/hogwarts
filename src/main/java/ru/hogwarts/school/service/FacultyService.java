@@ -13,4 +13,6 @@ public interface FacultyService {
     Faculty readAllByColor(String color);
     Faculty readByNameOrColor(String name, String color);
     List<Student> readStudentsByFaculty(long id);
+
+    String longestFacultyName();
 }

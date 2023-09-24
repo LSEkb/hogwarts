@@ -64,4 +64,14 @@ public class StudentController {
     public List<Student> lastFiveStudents(){
         return studentService.lastFiveStudents();
     }
+
+    @GetMapping("/name-first-a")
+    public List<String> readNameWithFirstCharA(){
+        return studentService.readNameWithFirstLetterA();
+    }
+
+    @GetMapping("/age-average-stream")
+    public Double averageAgeOfStudentsByStream(){
+        return studentService.averageAgeOfStudentsByStream();
+    }
 }

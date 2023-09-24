@@ -6,6 +6,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,27 +59,47 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> readAllByAge(int age) {
         return studentRepository.findByAge(age);
     }
+
     @Override
-    public List<Student> readByAgeBetween(int ageMin, int ageMax){
+    public List<Student> readByAgeBetween(int ageMin, int ageMax) {
         return studentRepository.findByAgeBetween(ageMin, ageMax);
     }
+
     @Override
-    public Faculty readFaculty(long id){
+    public Faculty readFaculty(long id) {
         return read(id).getFaculty();
     }
 
     @Override
-    public Integer totalStudentsInSchool(){
+    public Integer totalStudentsInSchool() {
         return studentRepository.totalStudentsInSchool();
     }
 
     @Override
-    public Integer averageAgeOfStudents(){
+    public Integer averageAgeOfStudents() {
         return studentRepository.averageAgeOfStudents();
     }
 
     @Override
-    public List<Student> lastFiveStudents(){
+    public List<Student> lastFiveStudents() {
         return studentRepository.lastStudents(5);
+    }
+
+    @Override
+    public List<String> readNameWithFirstLetterA() {
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .filter(n -> StringUtils.startsWithIgnoreCase(n, "a"))
+                .map(String::toUpperCase)
+                .sorted()
+                .toList();
+    }
+
+    @Override
+    public Double averageAgeOfStudentsByStream() {
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
     }
 }

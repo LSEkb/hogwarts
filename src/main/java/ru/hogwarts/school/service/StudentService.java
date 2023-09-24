@@ -20,4 +20,8 @@ public interface StudentService {
     Integer averageAgeOfStudents();
 
     List<Student> lastFiveStudents();
+
+    List<String> readNameWithFirstLetterA();
+
+    Double averageAgeOfStudentsByStream();
 }
