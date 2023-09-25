@@ -29,7 +29,7 @@ class StudentServiceImplTest {
     Student student1 = new Student(2L, "Ron", 18, new Faculty(1L, "Griffindor", "red"));
     Student student2 = new Student(3L, "Hermione", 18, new Faculty(1L, "Griffindor", "red"));
     Student student3 = new Student(4L, "Cedric", 12, new Faculty(1L, "Hufflepuff", "yellow"));
-    Student student4 = new Student(5L, "Draco", 12, new Faculty(1L, "Slytherin", "green"));
+    Student student4 = new Student(5L, "Alaster", 12, new Faculty(1L, "Slytherin", "green"));
     Student student5 = new Student(6L, "Luna", 12, new Faculty(1L, "Ravenclaw", "blue"));
 
     List<Student> students = List.of(student, student1, student2, student3, student4, student5);
@@ -162,6 +162,20 @@ class StudentServiceImplTest {
                         .limit(5).collect(Collectors.toList()));
         List<Student> result = underTest.lastFiveStudents();
         assertTrue(List.of(student1,student2,student3,student4,student5).containsAll(result));
+    }
+
+    @Test
+    void readNameWithFirstLetterA(){
+        when(studentRepository.findAll()).thenReturn(students);
+        List<String> result = underTest.readNameWithFirstLetterA();
+        assertEquals(List.of("ALASTER"), result);
+    }
+
+    @Test
+    void averageAgeOfStudentsByStream() {
+        when(studentRepository.findAll()).thenReturn(students);
+        Double result = underTest.averageAgeOfStudentsByStream();
+        assertEquals(15.0, result);
     }
 }
 

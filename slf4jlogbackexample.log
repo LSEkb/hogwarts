@@ -2908,3 +2908,6 @@ Identify and stop the process that's listening on port 8081 or configure this ap
 25.09.2023 20:28:05.185 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 34 ms
 25.09.2023 20:39:38.453 [http-nio-8080-exec-1] INFO   r.h.s.s.i.StudentServiceImpl - The AverageAgeOfStudents method was called
 25.09.2023 20:39:38.489 [http-nio-8080-exec-1] INFO   r.h.s.s.i.StudentServiceImpl - Returned from the AverageAgeOfStudents method 17
+25.09.2023 21:06:28.039 [HikariPool-1 housekeeper] WARN   c.z.h.p.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m19s853ms470µs800ns).
+25.09.2023 22:47:18.208 [Test worker] INFO   r.h.s.s.i.StudentServiceImpl - The LastFiveStudents method was called
+25.09.2023 22:47:18.225 [Test worker] INFO   r.h.s.s.i.StudentServiceImpl - Returned from the LastFiveStudents method [Student{id=6, name='Luna', age=12}, Student{id=5, name='Alaster', age=12}, Student{id=4, name='Cedric', age=12}, Student{id=3, name='Hermione', age=18}, Student{id=2, name='Ron', age=18}]
