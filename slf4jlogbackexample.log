@@ -2720,3 +2720,191 @@ Identify and stop the process that's listening on port 8081 or configure this ap
 24.09.2023 22:04:27.973 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8083"]
 24.09.2023 22:04:28.009 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8083 (http) with context path ''
 24.09.2023 22:04:28.022 [main] INFO   r.h.s.SchoolApplication - Started SchoolApplication in 8.555 seconds (JVM running for 9.215)
+25.09.2023 19:57:18.262 [main] INFO   r.h.s.SchoolApplication - Starting SchoolApplication using Java 17.0.8.1 on DESKTOP-EDFDEBE with PID 14072 (C:\Users\test0\IdeaProjects\school\build\classes\java\main started by adm001 in C:\Users\test0\IdeaProjects\school)
+25.09.2023 19:57:18.272 [main] INFO   r.h.s.SchoolApplication - No active profile set, falling back to 1 default profile: "default"
+25.09.2023 19:57:19.957 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+25.09.2023 19:57:20.040 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69 ms. Found 3 JPA repository interfaces.
+25.09.2023 19:57:21.218 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+25.09.2023 19:57:21.234 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+25.09.2023 19:57:21.238 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+25.09.2023 19:57:21.239 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.79]
+25.09.2023 19:57:21.414 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+25.09.2023 19:57:21.415 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3060 ms
+25.09.2023 19:57:21.805 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+25.09.2023 19:57:22.186 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+25.09.2023 19:57:22.463 [main] INFO   liquibase.database - Set default schema name to public
+25.09.2023 19:57:22.663 [main] INFO   l.lockservice - Successfully acquired change log lock
+25.09.2023 19:57:23.006 [main] INFO   liquibase.changelog - Reading from public.databasechangelog
+25.09.2023 19:57:23.152 [main] INFO   l.lockservice - Successfully released change log lock
+25.09.2023 19:57:23.503 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+25.09.2023 19:57:23.630 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+25.09.2023 19:57:24.051 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+25.09.2023 19:57:24.352 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+25.09.2023 19:57:25.434 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+25.09.2023 19:57:25.449 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+25.09.2023 19:57:26.504 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+25.09.2023 19:57:28.132 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+25.09.2023 19:57:28.174 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+25.09.2023 19:57:28.186 [main] INFO   r.h.s.SchoolApplication - Started SchoolApplication in 10.683 seconds (JVM running for 11.733)
+25.09.2023 20:03:17.820 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+25.09.2023 20:03:17.821 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+25.09.2023 20:03:17.825 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
+25.09.2023 20:03:19.414 [http-nio-8080-exec-7] INFO   o.s.a.AbstractOpenApiResource - Init duration for springdoc-openapi is: 469 ms
+25.09.2023 20:06:43.348 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - The Delete method was called with data 2
+25.09.2023 20:06:43.560 [http-nio-8080-exec-10] WARN   o.h.e.j.s.SqlExceptionHelper - SQL Error: 0, SQLState: 23503
+25.09.2023 20:06:43.560 [http-nio-8080-exec-10] ERROR  o.h.e.j.s.SqlExceptionHelper - ОШИБКА: UPDATE или DELETE в таблице "faculty" нарушает ограничение внешнего ключа "fk6geq7tnjed7u4hvgv1ac6lyh" таблицы "student"
+  Подробности: На ключ (id)=(2) всё ещё есть ссылки в таблице "student".
+25.09.2023 20:06:43.563 [http-nio-8080-exec-10] INFO   o.h.e.j.b.i.AbstractBatchImpl - HHH000010: On release of batch it still contained JDBC statements
+25.09.2023 20:06:43.569 [http-nio-8080-exec-10] ERROR  r.h.s.c.ControllerExceptionHandler - org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+25.09.2023 20:23:28.446 [main] INFO   r.h.s.SchoolApplication - Starting SchoolApplication using Java 17.0.8.1 on DESKTOP-EDFDEBE with PID 26852 (C:\Users\test0\IdeaProjects\school\build\classes\java\main started by adm001 in C:\Users\test0\IdeaProjects\school)
+25.09.2023 20:23:28.451 [main] INFO   r.h.s.SchoolApplication - No active profile set, falling back to 1 default profile: "default"
+25.09.2023 20:23:29.649 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+25.09.2023 20:23:29.735 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 3 JPA repository interfaces.
+25.09.2023 20:23:30.710 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+25.09.2023 20:23:30.720 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:23:30.726 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+25.09.2023 20:23:30.727 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.79]
+25.09.2023 20:23:30.917 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+25.09.2023 20:23:30.917 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2348 ms
+25.09.2023 20:23:31.172 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+25.09.2023 20:23:31.427 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+25.09.2023 20:23:31.654 [main] INFO   liquibase.database - Set default schema name to public
+25.09.2023 20:23:31.787 [main] INFO   l.lockservice - Successfully acquired change log lock
+25.09.2023 20:23:32.062 [main] INFO   liquibase.changelog - Reading from public.databasechangelog
+25.09.2023 20:23:32.118 [main] INFO   l.lockservice - Successfully released change log lock
+25.09.2023 20:23:32.339 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+25.09.2023 20:23:32.493 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+25.09.2023 20:23:32.838 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+25.09.2023 20:23:33.067 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+25.09.2023 20:23:33.993 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+25.09.2023 20:23:34.004 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+25.09.2023 20:23:34.818 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+25.09.2023 20:23:36.384 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:23:36.429 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+25.09.2023 20:23:36.443 [main] INFO   r.h.s.SchoolApplication - Started SchoolApplication in 8.465 seconds (JVM running for 9.266)
+25.09.2023 20:23:44.124 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+25.09.2023 20:23:44.125 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+25.09.2023 20:23:44.126 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+25.09.2023 20:23:44.897 [http-nio-8080-exec-4] INFO   o.s.a.AbstractOpenApiResource - Init duration for springdoc-openapi is: 427 ms
+25.09.2023 20:24:04.398 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:04.430 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 32 ms
+25.09.2023 20:24:05.298 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:05.328 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 29 ms
+25.09.2023 20:24:06.367 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:06.390 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 22 ms
+25.09.2023 20:24:07.270 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:07.298 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 27 ms
+25.09.2023 20:24:08.055 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:08.085 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 30 ms
+25.09.2023 20:24:08.857 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:08.882 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 24 ms
+25.09.2023 20:24:09.631 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:09.654 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 23 ms
+25.09.2023 20:24:10.403 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:10.422 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 19 ms
+25.09.2023 20:24:11.121 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:11.142 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 21 ms
+25.09.2023 20:24:11.823 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:24:11.844 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 20 ms
+25.09.2023 20:25:30.402 [main] INFO   r.h.s.SchoolApplication - Starting SchoolApplication using Java 17.0.8.1 on DESKTOP-EDFDEBE with PID 21588 (C:\Users\test0\IdeaProjects\school\build\classes\java\main started by adm001 in C:\Users\test0\IdeaProjects\school)
+25.09.2023 20:25:30.406 [main] INFO   r.h.s.SchoolApplication - No active profile set, falling back to 1 default profile: "default"
+25.09.2023 20:25:31.364 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+25.09.2023 20:25:31.447 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 3 JPA repository interfaces.
+25.09.2023 20:25:32.260 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+25.09.2023 20:25:32.268 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:25:32.271 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+25.09.2023 20:25:32.271 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.79]
+25.09.2023 20:25:32.426 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+25.09.2023 20:25:32.427 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1918 ms
+25.09.2023 20:25:32.614 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+25.09.2023 20:25:32.868 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+25.09.2023 20:25:33.038 [main] INFO   liquibase.database - Set default schema name to public
+25.09.2023 20:25:33.152 [main] INFO   l.lockservice - Successfully acquired change log lock
+25.09.2023 20:25:33.405 [main] INFO   liquibase.changelog - Reading from public.databasechangelog
+25.09.2023 20:25:33.467 [main] INFO   l.lockservice - Successfully released change log lock
+25.09.2023 20:25:33.624 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+25.09.2023 20:25:33.686 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+25.09.2023 20:25:33.925 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+25.09.2023 20:25:34.089 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+25.09.2023 20:25:34.874 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+25.09.2023 20:25:34.885 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+25.09.2023 20:25:35.677 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+25.09.2023 20:25:37.138 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:25:37.172 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+25.09.2023 20:25:37.187 [main] INFO   r.h.s.SchoolApplication - Started SchoolApplication in 7.219 seconds (JVM running for 7.81)
+25.09.2023 20:25:44.065 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+25.09.2023 20:25:44.065 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+25.09.2023 20:25:44.066 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+25.09.2023 20:25:44.806 [http-nio-8080-exec-2] INFO   o.s.a.AbstractOpenApiResource - Init duration for springdoc-openapi is: 377 ms
+25.09.2023 20:25:49.798 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:49.893 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 95 ms
+25.09.2023 20:25:50.619 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:50.670 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 51 ms
+25.09.2023 20:25:51.291 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:51.317 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 26 ms
+25.09.2023 20:25:51.920 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:51.959 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 39 ms
+25.09.2023 20:25:52.546 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:52.581 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 35 ms
+25.09.2023 20:25:53.184 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:53.209 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 25 ms
+25.09.2023 20:25:53.761 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:53.789 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 27 ms
+25.09.2023 20:25:54.426 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:54.454 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 28 ms
+25.09.2023 20:25:55.212 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:55.230 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 17 ms
+25.09.2023 20:25:55.934 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:25:55.951 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 16 ms
+25.09.2023 20:27:35.364 [main] INFO   r.h.s.SchoolApplication - Starting SchoolApplication using Java 17.0.8.1 on DESKTOP-EDFDEBE with PID 4336 (C:\Users\test0\IdeaProjects\school\build\classes\java\main started by adm001 in C:\Users\test0\IdeaProjects\school)
+25.09.2023 20:27:35.370 [main] INFO   r.h.s.SchoolApplication - No active profile set, falling back to 1 default profile: "default"
+25.09.2023 20:27:36.283 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+25.09.2023 20:27:36.364 [main] INFO   o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 3 JPA repository interfaces.
+25.09.2023 20:27:37.184 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+25.09.2023 20:27:37.191 [main] INFO   o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:27:37.194 [main] INFO   o.a.c.c.StandardService - Starting service [Tomcat]
+25.09.2023 20:27:37.194 [main] INFO   o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.79]
+25.09.2023 20:27:37.353 [main] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+25.09.2023 20:27:37.353 [main] INFO   o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1888 ms
+25.09.2023 20:27:37.513 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Starting...
+25.09.2023 20:27:37.760 [main] INFO   c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+25.09.2023 20:27:37.919 [main] INFO   liquibase.database - Set default schema name to public
+25.09.2023 20:27:38.024 [main] INFO   l.lockservice - Successfully acquired change log lock
+25.09.2023 20:27:38.257 [main] INFO   liquibase.changelog - Reading from public.databasechangelog
+25.09.2023 20:27:38.309 [main] INFO   l.lockservice - Successfully released change log lock
+25.09.2023 20:27:38.468 [main] INFO   o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+25.09.2023 20:27:38.560 [main] INFO   o.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+25.09.2023 20:27:38.812 [main] INFO   o.h.a.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+25.09.2023 20:27:38.987 [main] INFO   o.h.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+25.09.2023 20:27:39.917 [main] INFO   o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+25.09.2023 20:27:39.927 [main] INFO   o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+25.09.2023 20:27:40.728 [main] WARN   o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+25.09.2023 20:27:42.138 [main] INFO   o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+25.09.2023 20:27:42.165 [main] INFO   o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+25.09.2023 20:27:42.180 [main] INFO   r.h.s.SchoolApplication - Started SchoolApplication in 7.295 seconds (JVM running for 7.889)
+25.09.2023 20:27:50.274 [http-nio-8080-exec-1] INFO   o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+25.09.2023 20:27:50.274 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+25.09.2023 20:27:50.275 [http-nio-8080-exec-1] INFO   o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+25.09.2023 20:27:50.942 [http-nio-8080-exec-3] INFO   o.s.a.AbstractOpenApiResource - Init duration for springdoc-openapi is: 438 ms
+25.09.2023 20:27:56.601 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:27:56.683 [http-nio-8080-exec-6] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 81 ms
+25.09.2023 20:27:57.524 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:27:57.555 [http-nio-8080-exec-7] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 31 ms
+25.09.2023 20:27:58.739 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:27:58.776 [http-nio-8080-exec-8] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 37 ms
+25.09.2023 20:27:59.641 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:27:59.662 [http-nio-8080-exec-9] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 21 ms
+25.09.2023 20:28:00.647 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:00.664 [http-nio-8080-exec-10] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 16 ms
+25.09.2023 20:28:01.668 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:01.709 [http-nio-8080-exec-1] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 40 ms
+25.09.2023 20:28:02.587 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:02.608 [http-nio-8080-exec-2] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 20 ms
+25.09.2023 20:28:03.461 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:03.484 [http-nio-8080-exec-3] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 23 ms
+25.09.2023 20:28:04.383 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:04.424 [http-nio-8080-exec-4] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 41 ms
+25.09.2023 20:28:05.151 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - The Sum method was called
+25.09.2023 20:28:05.185 [http-nio-8080-exec-5] INFO   r.h.s.s.i.FacultyServiceImpl - Returned from the Sum method at 34 ms
+25.09.2023 20:39:38.453 [http-nio-8080-exec-1] INFO   r.h.s.s.i.StudentServiceImpl - The AverageAgeOfStudents method was called
+25.09.2023 20:39:38.489 [http-nio-8080-exec-1] INFO   r.h.s.s.i.StudentServiceImpl - Returned from the AverageAgeOfStudents method 17
