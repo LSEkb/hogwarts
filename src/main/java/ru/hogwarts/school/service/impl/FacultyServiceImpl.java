@@ -104,5 +104,13 @@ public class FacultyServiceImpl implements FacultyService {
         logger.info("Returned from the ReadStudentsByFaculty method {}", students);
         return students;
     }
+
+    @Override
+    public String longestFacultyName(){
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElseThrow(()->new FacultyException("No faculties in database"));
+    }
 }
 

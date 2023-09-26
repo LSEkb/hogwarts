@@ -28,6 +28,7 @@ class FacultyServiceImplTest {
     Faculty faculty = new Faculty(1L, "Griffindor", "red");
     Student student = new Student(1L, "Harry", 13);
 
+
     @Test
     void create_newFaculty_addAndReturn() {
         when(facultyRepository.findByNameAndColor(faculty.getName(), faculty.getColor()))
@@ -162,5 +163,15 @@ class FacultyServiceImplTest {
         FacultyException result = assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
         assertThrows(FacultyException.class, () -> underTest.readStudentsByFaculty(1L));
         assertEquals("The faculty with this Id was not found in the database", result.getMessage());
+    }
+
+    @Test
+    void longestFacultyName() {
+
+        Faculty faculty1 = new Faculty(2L, "Ravenclaw", "blue");
+        List<Faculty> faculties = List.of(faculty, faculty1);
+        when(facultyRepository.findAll()).thenReturn(faculties);
+        String result = underTest.longestFacultyName();
+        assertEquals("Griffindor",result);
     }
 }

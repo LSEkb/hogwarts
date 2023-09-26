@@ -8,6 +8,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -116,5 +117,23 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentRepository.lastStudents(5);
         logger.info("Returned from the LastFiveStudents method {}", students);
         return students;
+    }
+
+    @Override
+    public List<String> readNameWithFirstLetterA() {
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .filter(n -> StringUtils.startsWithIgnoreCase(n, "a"))
+                .map(String::toUpperCase)
+                .sorted()
+                .toList();
+    }
+
+    @Override
+    public Double averageAgeOfStudentsByStream() {
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
     }
 }
