@@ -24,4 +24,8 @@ public interface StudentService {
     List<String> readNameWithFirstLetterA();
 
     Double averageAgeOfStudentsByStream();
+
+    void readAllRandomInStream();
+
+    void readAllRandomSynchronized();
 }

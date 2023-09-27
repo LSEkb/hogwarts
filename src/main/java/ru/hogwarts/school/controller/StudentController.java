@@ -74,4 +74,14 @@ public class StudentController {
     public Double averageAgeOfStudentsByStream(){
         return studentService.averageAgeOfStudentsByStream();
     }
+
+    @GetMapping("/all - random")
+    public void readAllStream(){
+        studentService.readAllRandomInStream();
+    }
+
+    @GetMapping("/all-sync")
+    public void readAllSync(){
+        studentService.readAllRandomSynchronized();
+    }
 }

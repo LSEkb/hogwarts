@@ -136,4 +136,42 @@ public class StudentServiceImpl implements StudentService {
                 .average()
                 .orElse(0);
     }
+
+    @Override
+    public void readAllRandomInStream() {
+        List<Student> all = studentRepository.findAll();
+        System.out.println(all.get(0));
+        System.out.println(all.get(1));
+
+        new Thread(() -> {
+            System.out.println(all.get(2));
+            System.out.println(all.get(3));
+        }).start();
+
+        new Thread(() -> {
+        System.out.println(all.get(4));
+        System.out.println(all.get(5));
+        }).start();
+    }
+
+    @Override
+    public void readAllRandomSynchronized() {
+        List<Student> all = studentRepository.findAll();
+        printSync(0);
+        printSync(1);
+
+        new Thread(() -> {
+            printSync(2);
+            printSync(3);
+        }).start();
+
+        new Thread(() -> {
+            printSync(4);
+            printSync(5);
+        }).start();
+    }
+
+    private synchronized void printSync(int index){
+        System.out.println(studentRepository.findAll().get(index));
+    }
 }
